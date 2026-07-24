@@ -3,5 +3,5 @@ setuptools==75.8.0
 
 # Security module runtime deps (WI-11)
 httpx>=0.28.0
-numpy>=1.26.0
+numpy>=2.4.6
 qdrant-client>=1.12.0
