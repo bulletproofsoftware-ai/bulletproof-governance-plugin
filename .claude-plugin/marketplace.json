@@ -1,0 +1,14 @@
+{
+  "name": "governance",
+  "description": "Agent governance framework",
+  "owner": { "name": "bulletproofsoftware-ai" },
+  "plugins": [
+    {
+      "name": "governance",
+      "description": "Agent governance framework — identity manifests, trust broker, audit bus",
+      "version": "0.1.0",
+      "source": "./",
+      "author": { "name": "AdvanceCyber" }
+    }
+  ]
+}

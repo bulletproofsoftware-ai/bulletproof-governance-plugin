@@ -1,0 +1,57 @@
+# Agent Runtime Security Configuration (WI-11)
+# All thresholds are operator-configurable without code changes.
+
+behavioral_monitor:
+  metrics:
+    FILE_ACCESS_FREQUENCY:
+      min_sessions: 10
+      threshold_sigma: 3.0
+      agent_class_overrides:
+        read_only: { threshold_sigma: 2.0 }
+        write_authorized: { threshold_sigma: 3.5 }
+        external_facing: { threshold_sigma: 2.5 }
+    TOOL_USAGE_DISTRIBUTION:
+      min_sessions: 10
+      threshold_kl_divergence: 0.4
+    TOKEN_CONSUMPTION_RATE:
+      min_sessions: 20
+      threshold_sigma: 2.5
+    API_CALL_PATTERNS:
+      min_sessions: 10
+      threshold_rate_spike: 10.0
+      threshold_new_endpoint: true
+    DIRECTORY_ACCESS_BREADTH:
+      min_sessions: 10
+      threshold_sigma: 2.0
+      threshold_new_prefix: true
+    EXTERNAL_NETWORK_CALLS:
+      min_sessions: 10
+      threshold_new_host: true
+      allowlist_path: host-allowlist.yaml
+    SESSION_DURATION:
+      min_sessions: 20
+      threshold_sigma: 3.0
+    ERROR_RATE:
+      min_sessions: 20
+      threshold_sigma: 2.0
+      threshold_spike_pct: 50.0
+
+guardian:
+  autonomy_level: SEMI_AUTONOMOUS
+  notification:
+    webhook_url: null
+    webhook_timeout_ms: 5000
+    max_notification_delay_seconds: 30
+  configuration_change:
+    required_scope: security_admin
+    require_double_confirm_for_full_auto: true
+
+memory_anomaly_threshold: 4.5
+injection_similarity_threshold: 0.85
+semantic_consistency_threshold: 0.35
+forensic_retention_days: 90
+host_allowlist_path: host-allowlist.yaml
+ollama_url: "http://localhost:11434"
+ollama_model: "nomic-embed-text"
+qdrant_url: "http://localhost:6334"
+dashboard_port: 8101

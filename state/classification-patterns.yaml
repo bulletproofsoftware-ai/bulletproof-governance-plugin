@@ -1,0 +1,26 @@
+restricted:
+  - '\b(password|secret|api[_-]?key|private[_-]?key|token|credential)\s*[:=]\s*\S+'
+  - '\b\d{3}-\d{2}-\d{4}\b'
+  - '-----BEGIN\s+(RSA|EC|PRIVATE)\s+KEY-----'
+  - '\b(bearer\s+[a-zA-Z0-9\-._~+/]+=*)\b'
+  # CLUE-SOC additive entries (Phase 4, REQ-CLU-036) — strip at LLM boundary, retain in audit.db
+  - '\bsession[_-]?token\s*[:=]\s*[A-Za-z0-9_\-.+/]{16,}'
+  - '\b(mfa[_-]?otp|totp|hotp)\s*[:=]\s*\d{6,8}\b'
+  - '\b[Bb]earer\s+ey[A-Za-z0-9_\-]{20,}\.[A-Za-z0-9_\-]{20,}\.[A-Za-z0-9_\-]{20,}\b'
+  - '\bAKIA[0-9A-Z]{16}\b'
+  - '\b(ASIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASCA)[0-9A-Z]{16}\b'
+  - '\bAIzaSy[A-Za-z0-9_\-]{33}\b'
+  - '\bya29\.[0-9A-Za-z_\-]{20,}\b'
+  - '\b-----BEGIN\s+(GOOGLE|GCP|AWS|SERVICE\s+ACCOUNT)\s+PRIVATE\s+KEY-----'
+  - '\b"private_key_id"\s*:\s*"[a-f0-9]{40}"'
+
+confidential:
+  - '\b(internal[_-]?only|do[_-]?not[_-]?share|proprietary|confidential)\b'
+  - '\bCVE-\d{4}-\d{4,7}\b'
+  - '\b(salary|compensation|revenue|profit)\s*[:=$]'
+  - '\b(ssn|social[_-]?security|tax[_-]?id)\b'
+
+internal:
+  - '\b(prod(uction)?|staging)\s+\b(server|host|endpoint|cluster)\b'
+  - '\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
+  - '\b[a-zA-Z0-9\-]+\.(internal|corp|local)\b'

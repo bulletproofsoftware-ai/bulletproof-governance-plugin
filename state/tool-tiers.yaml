@@ -1,0 +1,65 @@
+exempt:
+  - "Read"
+  - "Glob"
+  - "Grep"
+  - "TaskList"
+  - "TaskGet"
+  - "AskUserQuestion"
+  - "mcp__claude-memory__memory_store"  # memory writes are non-destructive; allowed at all tiers (memory_forget stays elevated)
+  # CLUE-SOC additive entries (Phase 4, REQ-XCT-001..005, source of truth: clue-soc/domains/soc/tools-allowlist.yaml)
+  - "edr.query"
+  - "idp.query"
+  - "cloud_audit.query"
+  - "ti.lookup"
+  - "siem.search"
+  - "asset.lookup"
+  - "identity.graph_query"
+  - "dns.query"
+  - "mitre.technique_lookup"
+
+standard:
+  - "Edit"
+  - "Write"
+  - "Task"
+  - "Bash"
+  - "WebFetch"
+  - "WebSearch"
+  - "Skill"  # /conduct orchestrator entrypoint; elevated ops inside stay individually gated
+  - "Agent"  # subagent-dispatch tool (harness alias for Task); same tier as Task
+  # CLUE-SOC additive entries (Phase 4)
+  - "jira.create_ticket"
+  - "slack.post_message"
+  - "pagerduty.trigger"
+  - "linear.create_issue"
+  - "servicenow.create_incident"
+  - "ms_teams.post_message"
+  - "email.notify_soc"
+
+elevated:
+  - "mcp__claude-memory__memory_forget"
+  - "NotebookEdit"
+  # CLUE-SOC additive entries (Phase 4) — user-affecting but reversible, one-click analyst approval
+  - "idp.reset_password"
+  - "edr.kill_process_user_session"
+  - "idp.require_step_up_mfa"
+  - "cloud.tag_resource_for_review"
+  - "edr.collect_forensic_artifact"
+  - "dns.sinkhole_domain"
+
+# CLUE-SOC additive (Phase 4) — destructive containment requires MFA HUMAN_GATE + SoD
+elevated_destructive:
+  - "edr.isolate_host"
+  - "idp.disable_user"
+  - "idp.revoke_all_sessions"
+  - "firewall.block_cidr_larger_than_32"
+  - "cloud.terminate_instance"
+  - "cloud.delete_snapshot"
+  - "cloud.detach_iam_role"
+  - "edr.quarantine_file"
+  - "cloud.rotate_signing_key"
+  - "cloud.delete_storage_object"
+  - "email.recall_message"
+
+elevated_patterns:
+  - "mcp__MCP_DOCKER__*"
+  - "mcp__hostinger-mcp__*"
