@@ -1,0 +1,17 @@
+# gitleaks config for bulletproof-governance-plugin.
+# Allowlists test fixtures: the memory-governor tests deliberately contain
+# fake secret-shaped strings (e.g. "api_key = sk-abc123xyz", "password = hunter2")
+# to verify the classifier flags them as restricted. No real secrets present.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Test fixtures with fake secret-shaped strings"
+paths = [
+  '''tests/.*\.py$''',
+]
+regexes = [
+  '''sk-abc123xyz''',
+  '''password = hunter2''',
+]
