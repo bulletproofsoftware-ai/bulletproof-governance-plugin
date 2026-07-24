@@ -1,0 +1,23 @@
+# Runtime state (per-environment, never committed)
+state/audit.db
+state/audit.db-wal
+state/audit.db-shm
+state/audit-buffer.json
+state/audit-buffer.replaying
+state/active-manifests.json
+state/active-manifests.lock
+state/session-state.json
+state/manifests/
+state/memory-integrity-errors.log
+governance/state/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.DS_Store

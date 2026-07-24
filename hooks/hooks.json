@@ -1,0 +1,76 @@
+{
+  "description": "Governance enforcement hooks with security runtime (WI-11)",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} ] && export $(grep QDRANT_API_KEY ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} | xargs) 2>/dev/null; ~/.claude/scripts/memory/venv/bin/python3 ${CLAUDE_PLUGIN_ROOT}/hooks/session_start.py",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} ] && export $(grep QDRANT_API_KEY ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} | xargs) 2>/dev/null; ~/.claude/scripts/memory/venv/bin/python3 ${CLAUDE_PLUGIN_ROOT}/hooks/pre_tool_security.py",
+            "timeout": 10000
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__claude-memory__memory_store",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} ] && export $(grep QDRANT_API_KEY ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} | xargs) 2>/dev/null; ~/.claude/scripts/memory/venv/bin/python3 ${CLAUDE_PLUGIN_ROOT}/hooks/memory_integrity_hook.py",
+            "timeout": 15000
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/memory/venv/bin/python3 ${CLAUDE_PLUGIN_ROOT}/hooks/pre_tool_check.py",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/memory/venv/bin/python3 ${CLAUDE_PLUGIN_ROOT}/hooks/post_tool_metrics.py",
+            "timeout": 5000
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} ] && export $(grep QDRANT_API_KEY ${BPM_ENV_FILE:-~/.bulletproof-memory/.env} | xargs) 2>/dev/null; ~/.claude/scripts/memory/venv/bin/python3 ${CLAUDE_PLUGIN_ROOT}/hooks/post_tool_security.py",
+            "timeout": 8000
+          }
+        ]
+      },
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/memory/venv/bin/python3 ${CLAUDE_PLUGIN_ROOT}/hooks/post_task_cleanup.py",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}
