@@ -9,7 +9,7 @@ Claude Code plugin with pre/post-tool hooks.
 
 ## What it does
 
-- **Identity manifests** — every agent has a declared manifest (`state/manifests/`)
+- **Identity manifests** — every agent has a declared manifest (generated under `state/` at runtime)
   defining its capabilities and permissions.
 - **Trust broker** — validates agent identity and brokers cross-agent trust.
 - **Audit bus** — append-only audit log of governance-relevant events.
@@ -34,7 +34,7 @@ file holding `QDRANT_API_KEY` (the hooks read it for the security collections).
 - **`state/host-allowlist.yaml`** — the network allowlist the policy engine enforces.
   Ships with example entries; **replace with your own** servers/domains.
 - **`state/classification-patterns.yaml`** — data-classification patterns.
-- **`state/manifests/*.yaml`** — per-agent capability manifests.
+- Per-agent capability manifests are written under `state/` at runtime (gitignored).
 
 ## Security collections
 
