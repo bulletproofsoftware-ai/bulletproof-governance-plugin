@@ -3,8 +3,8 @@
 # Launch the thin read-only HITL audit API (governance/lib/hitl_api.py).
 #
 # Exposes the approval-gate audit trail (human_gate / human_gate_response in
-# state/audit.db) read-only over HTTP so an external console (e.g. an external console) can
-# DISPLAY it. There is no write-back/approve endpoint by design — the gate has
+# state/audit.db) read-only over HTTP so an external console (e.g. a dashboard
+# or admin UI) can DISPLAY it. There is no write-back/approve endpoint by design — the gate has
 # no external control point (see the module docstring).
 #
 # Required:

@@ -17,5 +17,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
+      # Optional dashboard/HITL API deps (see docs/INSTALL.md) — installed so
+      # the API modules import and their tests run in CI.
+      - run: pip install fastapi PyJWT
       - run: pip install pytest
       - run: pytest

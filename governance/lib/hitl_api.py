@@ -2,7 +2,7 @@
 
 Exposes the governance approval-gate audit trail (``human_gate`` /
 ``human_gate_response`` events in ``state/audit.db``) over a small HTTP
-surface so an external console (e.g. an external console) can DISPLAY it.
+surface so an external console (e.g. a dashboard or admin UI) can DISPLAY it.
 
 This API is deliberately **read-only**. The governance gate has no external
 control point: the actual approval is Claude Code's own in-session permission

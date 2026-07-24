@@ -59,9 +59,10 @@ The hook commands and modules read the following environment variables:
 | `GOVERNANCE_AUDIT_REQUIRE_TOKEN` | When truthy (`1`/`true`/`yes`/`on`), enforce the audit service-token write gate. Advisory by default. | unset (advisory) |
 
 > The hook definitions in `hooks/hooks.json` invoke Python via
-> `~/.claude/scripts/memory/venv/bin/python3`. If your interpreter lives
-> elsewhere, adjust the `command` entries (or ensure that path resolves to a
-> Python 3.11+ interpreter with the `governance` package importable).
+> `${GOVERNANCE_PYTHON:-python3}` — by default the `python3` on your `PATH`.
+> To use a dedicated interpreter (e.g. a virtualenv), set `GOVERNANCE_PYTHON`
+> to its absolute path. Whatever interpreter resolves must be Python 3.11+
+> with the plugin's requirements installed.
 
 ## 4. (Optional) Provision the security Qdrant collections
 
