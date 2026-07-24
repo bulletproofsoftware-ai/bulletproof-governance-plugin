@@ -7,7 +7,7 @@ name = "governance"
 version = "0.1.0"
 description = "Claude Code agent governance framework"
 requires-python = ">=3.11"
-dependencies = ["pyyaml>=6.0"]
+dependencies = ["pyyaml>=6.0.3"]
 
 [tool.setuptools.packages.find]
 where = ["."]
