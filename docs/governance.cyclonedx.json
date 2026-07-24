@@ -1,0 +1,65 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "governance",
+      "version": "0.1.0",
+      "description": "Agent governance framework for Claude Code",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }],
+      "purl": "pkg:pypi/governance@0.1.0"
+    },
+    "properties": [
+      { "name": "note", "value": "Hand-authored from requirements.txt and pyproject.toml (direct dependencies only). No CycloneDX generator was available for this pure-Python project." }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "pyyaml",
+      "version": "6.0.2",
+      "purl": "pkg:pypi/pyyaml@6.0.2",
+      "licenses": [{ "license": { "id": "MIT" } }],
+      "scope": "required",
+      "properties": [{ "name": "requirement", "value": "==6.0.2 (core, pyproject: pyyaml>=6.0)" }]
+    },
+    {
+      "type": "library",
+      "name": "setuptools",
+      "version": "83.0.0",
+      "purl": "pkg:pypi/setuptools@83.0.0",
+      "licenses": [{ "license": { "id": "MIT" } }],
+      "scope": "required",
+      "properties": [{ "name": "requirement", "value": "==83.0.0 (build backend; bumped from 75.8.0 to remediate CVE-2025-47273 and CVE-2026-59890)" }]
+    },
+    {
+      "type": "library",
+      "name": "httpx",
+      "version": "0.28.0",
+      "purl": "pkg:pypi/httpx@0.28.0",
+      "licenses": [{ "license": { "id": "BSD-3-Clause" } }],
+      "scope": "optional",
+      "properties": [{ "name": "requirement", "value": ">=0.28.0 (runtime-security modules)" }]
+    },
+    {
+      "type": "library",
+      "name": "numpy",
+      "version": "1.26.0",
+      "purl": "pkg:pypi/numpy@1.26.0",
+      "licenses": [{ "license": { "id": "BSD-3-Clause" } }],
+      "scope": "optional",
+      "properties": [{ "name": "requirement", "value": ">=1.26.0 (runtime-security modules)" }]
+    },
+    {
+      "type": "library",
+      "name": "qdrant-client",
+      "version": "1.12.0",
+      "purl": "pkg:pypi/qdrant-client@1.12.0",
+      "licenses": [{ "license": { "id": "Apache-2.0" } }],
+      "scope": "optional",
+      "properties": [{ "name": "requirement", "value": ">=1.12.0 (runtime-security modules; Qdrant collections)" }]
+    }
+  ]
+}

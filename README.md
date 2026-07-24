@@ -2,6 +2,8 @@
 
 **An agent-governance framework for Claude Code: identity, trust, audit, policy, and memory governance.**
 
+![bulletproof-governance-plugin — overview](docs/media/infographic.png)
+
 `bulletproof-governance-plugin` adds a governance layer to Claude Code — agent identity
 manifests, a trust broker, an append-only audit bus, a policy engine, and a memory
 governor that classifies and guards what gets written to memory. It installs as a
@@ -47,6 +49,26 @@ governance layer uses (reads `QDRANT_API_KEY` from your env / env file).
 pip install -e .
 python -m pytest tests/
 ```
+
+## Documentation
+
+- [docs/OVERVIEW.md](docs/OVERVIEW.md) — architecture and components
+- [docs/INSTALL.md](docs/INSTALL.md) — install and configuration
+- [docs/HOW-TO-USE.md](docs/HOW-TO-USE.md) — day-to-day usage and commands
+- [docs/ADMINISTRATOR.md](docs/ADMINISTRATOR.md) — operations and the HITL API
+- [docs/SBOM.md](docs/SBOM.md) — software bill of materials
+- [docs/scan/scan-report.md](docs/scan/scan-report.md) — security scan results (0 critical / 0 high)
+
+## Media
+
+An overview deck, explainer video, and briefing doc (generated with NotebookLM
+from the docs above) live in [`media/`](media/). The overview infographic is
+`docs/media/infographic.png` (shown above). NotebookLM raster text may contain
+minor spelling artifacts.
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for the vulnerability-reporting policy.
 
 ## License
 
