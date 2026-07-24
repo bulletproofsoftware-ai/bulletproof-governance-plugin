@@ -3,5 +3,5 @@
   "description": "Agent governance framework — identity manifests, trust broker, audit bus, policy engine, memory governor",
   "version": "0.1.0",
   "author": { "name": "bulletproofsoftware-ai" },
-  "license": "MIT"
+  "license": "Apache-2.0"
 }
