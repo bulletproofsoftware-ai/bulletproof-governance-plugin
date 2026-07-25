@@ -1,0 +1,54 @@
+name: CodeQL
+
+# Static analysis via GitHub CodeQL.
+#
+# NOTE: code scanning requires GitHub Advanced Security on private
+# repositories. While this repo is private without GHAS, the analyze step
+# will fail to upload results. The workflow is committed so scanning starts
+# automatically the moment GHAS is enabled or the repo becomes public.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - python
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@3b0bd1d116c0bde30213346b22d4f634d96a2fb0 # v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@3b0bd1d116c0bde30213346b22d4f634d96a2fb0 # v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@3b0bd1d116c0bde30213346b22d4f634d96a2fb0 # v3
+        with:
+          category: "/language:${{ matrix.language }}"
