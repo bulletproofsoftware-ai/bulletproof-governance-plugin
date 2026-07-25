@@ -5,6 +5,7 @@ Endpoints: sessions, threats, quarantine, Guardian actions, CSS/TUE, identities,
 forensic replay, compliance reports.
 """
 
+import hmac
 import json
 import logging
 import os
@@ -116,11 +117,37 @@ def create_app(qdrant=None, audit_bus=None, config=None) -> FastAPI:
     # ------------------------------------------------------------------
     @app.post("/api/security/token")
     async def generate_token(request: Request):
-        """Generate JWT token. Requires SECURITY_JWT_SECRET to be set."""
-        body = await request.json()
-        subject = body.get("subject", "operator")
+        """Mint a dashboard JWT.
+
+        The caller must prove it already holds SECURITY_JWT_SECRET, by sending
+        it as ``Authorization: Bearer <secret>`` or ``X-Security-Secret``.
+        Without that check this endpoint issued an operator token to any
+        anonymous caller who could reach the port, which defeats the
+        authentication on every other route in this API.
+        """
+        if not JWT_SECRET:
+            raise HTTPException(500, "SECURITY_JWT_SECRET not set")
+
+        header = request.headers.get("authorization") or ""
+        presented = (
+            header[7:] if header.lower().startswith("bearer ") else ""
+        ) or request.headers.get("x-security-secret", "")
+
+        # Constant-time compare so the secret cannot be recovered byte-by-byte
+        # from response timing.
+        if not presented or not hmac.compare_digest(presented, JWT_SECRET):
+            raise HTTPException(401, "Invalid or missing bootstrap secret")
+
         try:
-            token = create_token(subject)
+            body = await request.json()
+        except Exception:
+            body = {}
+        subject = body.get("subject", "operator")
+        if not isinstance(subject, str) or not subject.strip():
+            raise HTTPException(400, "subject must be a non-empty string")
+
+        try:
+            token = create_token(subject.strip())
             return {"token": token, "expires_in": JWT_EXPIRY_HOURS * 3600}
         except ValueError as e:
             raise HTTPException(500, str(e))

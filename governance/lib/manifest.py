@@ -99,9 +99,35 @@ def _min_classification(a: str, b: str) -> str:
 # Loading
 # ---------------------------------------------------------------------------
 def load_static_manifest(agent_id: str) -> Optional[dict]:
-    """Load a static YAML manifest for agent_id. Returns None if not found."""
+    """Load a static YAML manifest for agent_id. Returns None if not found.
+
+    agent_id is treated as untrusted: it reaches here from hook payloads and
+    tool arguments. Without the check below, an id like "../../etc/passwd" or
+    an absolute path escapes the manifests directory (pathlib replaces the
+    base entirely when the right-hand operand is absolute), letting a caller
+    load an arbitrary YAML file as a manifest.
+    """
+    if not isinstance(agent_id, str) or not agent_id:
+        return None
+    # A manifest name is a single path segment: no separators, no traversal.
+    if (
+        "/" in agent_id
+        or "\\" in agent_id
+        or agent_id.startswith(".")
+        or "\x00" in agent_id
+    ):
+        return None
+
     manifests_dir = _get_manifests_dir()
     path = manifests_dir / f"{agent_id}.yaml"
+
+    # Belt and braces: confirm the resolved path really is inside the
+    # manifests directory before touching it.
+    try:
+        path.resolve().relative_to(manifests_dir.resolve())
+    except (ValueError, OSError):
+        return None
+
     if not path.exists():
         return None
     try:
