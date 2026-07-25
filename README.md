@@ -61,8 +61,8 @@ python -m pytest tests/
 
 ## Media
 
-An explainer video and briefing doc (generated with NotebookLM from the docs
-above) live in [`media/`](media/). The overview infographic is
+An explainer video, briefing doc, and [slide deck](media/bulletproof-governance-plugin-deck.pdf)
+(generated with NotebookLM from the docs above) live in [`media/`](media/). The overview infographic is
 `docs/media/infographic.png` (shown above). NotebookLM raster text may contain
 minor spelling artifacts.
 
