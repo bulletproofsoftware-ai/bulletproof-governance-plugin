@@ -762,12 +762,38 @@ class AuditBus:
     # ------------------------------------------------------------------
     # Buffer (fallback when DB unavailable)
     # ------------------------------------------------------------------
+    # Key fragments whose values must never reach the buffer file. The buffer is
+    # the fallback path taken when the audit DB is unavailable, so it is written
+    # unencrypted to local disk and can outlive the incident that produced it.
+    _SENSITIVE_KEY_FRAGMENTS = (
+        "password", "passwd", "secret", "token", "api_key", "apikey",
+        "authorization", "credential", "private_key", "session_key",
+    )
+
+    @classmethod
+    def _redact_sensitive(cls, value):
+        """Recursively replace values whose key names look sensitive."""
+        if isinstance(value, dict):
+            out = {}
+            for k, v in value.items():
+                if any(frag in str(k).lower() for frag in cls._SENSITIVE_KEY_FRAGMENTS):
+                    out[k] = "[REDACTED]"
+                else:
+                    out[k] = cls._redact_sensitive(v)
+            return out
+        if isinstance(value, list):
+            return [cls._redact_sensitive(v) for v in value]
+        return value
+
     def _buffer_event_dict(self, event: dict) -> None:
-        """Append event as JSON line to buffer file."""
+        """Append event as JSON line to buffer file, with credentials redacted."""
         try:
             self.buffer_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(self.buffer_path, "a") as f:
-                f.write(json.dumps(event) + "\n")
+            safe_event = self._redact_sensitive(event)
+            # 0600: the buffer can contain audit detail even after redaction.
+            fd = os.open(self.buffer_path, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
+            with os.fdopen(fd, "a") as f:
+                f.write(json.dumps(safe_event) + "\n")
         except Exception:
             pass  # last resort — drop silently
 
