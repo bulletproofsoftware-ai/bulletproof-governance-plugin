@@ -1,0 +1,4 @@
+# Optional dashboard/HITL API deps (see docs/INSTALL.md) + test runner.
+fastapi
+PyJWT
+pytest

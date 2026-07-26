@@ -16,9 +16,16 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.11'
-      - run: pip install -r requirements.txt
-      # Optional dashboard/HITL API deps (see docs/INSTALL.md) — installed so
-      # the API modules import and their tests run in CI.
-      - run: pip install fastapi PyJWT
-      - run: pip install pytest
+      # Both files are compiled by pip-tools with --generate-hashes, so
+      # --require-hashes installs the exact artifacts recorded there and fails
+      # if any of them has been altered. Regenerate with:
+      #   docker run --rm -v "$PWD":/w -w /w python:3.11-slim sh -c \
+      #     'pip install pip-tools && pip-compile --generate-hashes \
+      #      --output-file=requirements.txt requirements.in'
+      # (run in the image CI uses, not on a dev machine — the hash set is
+      # resolved per platform).
+      - run: pip install --require-hashes -r requirements.txt
+      # Optional dashboard/HITL API deps (see docs/INSTALL.md) + the test
+      # runner, so the API modules import and their tests run in CI.
+      - run: pip install --require-hashes -r requirements-dev.txt
       - run: pytest
