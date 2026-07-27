@@ -1,65 +1,471 @@
 {
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
-  "specVersion": "1.5",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:1acfee72-8fda-493b-bf0c-04430e5a96b1",
   "version": 1,
   "metadata": {
-    "component": {
-      "type": "application",
-      "name": "governance",
-      "version": "0.1.0",
-      "description": "Agent governance framework for Claude Code",
-      "licenses": [{ "license": { "id": "Apache-2.0" } }],
-      "purl": "pkg:pypi/governance@0.1.0"
+    "timestamp": "2026-07-27T23:30:00+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "manufacturer": {
+            "name": "Aqua Security Software Ltd."
+          },
+          "group": "aquasecurity",
+          "name": "trivy",
+          "version": "0.69.1"
+        }
+      ]
     },
-    "properties": [
-      { "name": "note", "value": "Hand-authored from requirements.txt and pyproject.toml (direct dependencies only). No CycloneDX generator was available for this pure-Python project." }
-    ]
+    "component": {
+      "bom-ref": "adf31635-da49-4519-8eaf-b139f5cf2815",
+      "type": "application",
+      "name": ".",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:SchemaVersion",
+          "value": "2"
+        }
+      ]
+    }
   },
   "components": [
     {
+      "bom-ref": "29ff61b5-1487-48fa-8d2b-1f12e572c481",
+      "type": "application",
+      "name": "requirements.txt",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:Class",
+          "value": "lang-pkgs"
+        },
+        {
+          "name": "aquasecurity:trivy:Type",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/annotated-types@0.8.0",
+      "type": "library",
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "purl": "pkg:pypi/annotated-types@0.8.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/anyio@4.14.2",
+      "type": "library",
+      "name": "anyio",
+      "version": "4.14.2",
+      "purl": "pkg:pypi/anyio@4.14.2",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/certifi@2026.7.22",
+      "type": "library",
+      "name": "certifi",
+      "version": "2026.7.22",
+      "purl": "pkg:pypi/certifi@2026.7.22",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/grpcio@1.83.0",
+      "type": "library",
+      "name": "grpcio",
+      "version": "1.83.0",
+      "purl": "pkg:pypi/grpcio@1.83.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/h11@0.16.0",
+      "type": "library",
+      "name": "h11",
+      "version": "0.16.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/h11@0.16.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/h2@4.4.0",
+      "type": "library",
+      "name": "h2",
+      "version": "4.4.0",
+      "purl": "pkg:pypi/h2@4.4.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/hpack@4.2.0",
+      "type": "library",
+      "name": "hpack",
+      "version": "4.2.0",
+      "purl": "pkg:pypi/hpack@4.2.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/httpcore@1.0.9",
+      "type": "library",
+      "name": "httpcore",
+      "version": "1.0.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/httpcore@1.0.9",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/httpx@0.28.1",
+      "type": "library",
+      "name": "httpx",
+      "version": "0.28.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/httpx@0.28.1",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/hyperframe@6.1.0",
+      "type": "library",
+      "name": "hyperframe",
+      "version": "6.1.0",
+      "purl": "pkg:pypi/hyperframe@6.1.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/idna@3.18",
+      "type": "library",
+      "name": "idna",
+      "version": "3.18",
+      "purl": "pkg:pypi/idna@3.18",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/numpy@2.4.6",
+      "type": "library",
+      "name": "numpy",
+      "version": "2.4.6",
+      "purl": "pkg:pypi/numpy@2.4.6",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/portalocker@3.2.0",
+      "type": "library",
+      "name": "portalocker",
+      "version": "3.2.0",
+      "purl": "pkg:pypi/portalocker@3.2.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/protobuf@7.35.1",
+      "type": "library",
+      "name": "protobuf",
+      "version": "7.35.1",
+      "purl": "pkg:pypi/protobuf@7.35.1",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/pydantic-core@2.46.4",
+      "type": "library",
+      "name": "pydantic-core",
+      "version": "2.46.4",
+      "purl": "pkg:pypi/pydantic-core@2.46.4",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/pydantic@2.13.4",
+      "type": "library",
+      "name": "pydantic",
+      "version": "2.13.4",
+      "purl": "pkg:pypi/pydantic@2.13.4",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/pyyaml@6.0.2",
       "type": "library",
       "name": "pyyaml",
       "version": "6.0.2",
       "purl": "pkg:pypi/pyyaml@6.0.2",
-      "licenses": [{ "license": { "id": "MIT" } }],
-      "scope": "required",
-      "properties": [{ "name": "requirement", "value": "==6.0.2 (core, pyproject: pyyaml>=6.0)" }]
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
     },
     {
-      "type": "library",
-      "name": "setuptools",
-      "version": "83.0.0",
-      "purl": "pkg:pypi/setuptools@83.0.0",
-      "licenses": [{ "license": { "id": "MIT" } }],
-      "scope": "required",
-      "properties": [{ "name": "requirement", "value": "==83.0.0 (build backend; bumped from 75.8.0 to remediate CVE-2025-47273 and CVE-2026-59890)" }]
-    },
-    {
-      "type": "library",
-      "name": "httpx",
-      "version": "0.28.0",
-      "purl": "pkg:pypi/httpx@0.28.0",
-      "licenses": [{ "license": { "id": "BSD-3-Clause" } }],
-      "scope": "optional",
-      "properties": [{ "name": "requirement", "value": ">=0.28.0 (runtime-security modules)" }]
-    },
-    {
-      "type": "library",
-      "name": "numpy",
-      "version": "1.26.0",
-      "purl": "pkg:pypi/numpy@1.26.0",
-      "licenses": [{ "license": { "id": "BSD-3-Clause" } }],
-      "scope": "optional",
-      "properties": [{ "name": "requirement", "value": ">=1.26.0 (runtime-security modules)" }]
-    },
-    {
+      "bom-ref": "pkg:pypi/qdrant-client@1.18.0",
       "type": "library",
       "name": "qdrant-client",
-      "version": "1.12.0",
-      "purl": "pkg:pypi/qdrant-client@1.12.0",
-      "licenses": [{ "license": { "id": "Apache-2.0" } }],
-      "scope": "optional",
-      "properties": [{ "name": "requirement", "value": ">=1.12.0 (runtime-security modules; Qdrant collections)" }]
+      "version": "1.18.0",
+      "purl": "pkg:pypi/qdrant-client@1.18.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/typing-extensions@4.16.0",
+      "type": "library",
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "purl": "pkg:pypi/typing-extensions@4.16.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/typing-inspection@0.4.2",
+      "type": "library",
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:pypi/typing-inspection@0.4.2",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pypi/urllib3@2.7.0",
+      "type": "library",
+      "name": "urllib3",
+      "version": "2.7.0",
+      "purl": "pkg:pypi/urllib3@2.7.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pip"
+        }
+      ]
     }
-  ]
+  ],
+  "dependencies": [
+    {
+      "ref": "29ff61b5-1487-48fa-8d2b-1f12e572c481",
+      "dependsOn": [
+        "pkg:pypi/annotated-types@0.8.0",
+        "pkg:pypi/anyio@4.14.2",
+        "pkg:pypi/certifi@2026.7.22",
+        "pkg:pypi/grpcio@1.83.0",
+        "pkg:pypi/h11@0.16.0",
+        "pkg:pypi/h2@4.4.0",
+        "pkg:pypi/hpack@4.2.0",
+        "pkg:pypi/httpcore@1.0.9",
+        "pkg:pypi/httpx@0.28.1",
+        "pkg:pypi/hyperframe@6.1.0",
+        "pkg:pypi/idna@3.18",
+        "pkg:pypi/numpy@2.4.6",
+        "pkg:pypi/portalocker@3.2.0",
+        "pkg:pypi/protobuf@7.35.1",
+        "pkg:pypi/pydantic-core@2.46.4",
+        "pkg:pypi/pydantic@2.13.4",
+        "pkg:pypi/pyyaml@6.0.2",
+        "pkg:pypi/qdrant-client@1.18.0",
+        "pkg:pypi/typing-extensions@4.16.0",
+        "pkg:pypi/typing-inspection@0.4.2",
+        "pkg:pypi/urllib3@2.7.0"
+      ]
+    },
+    {
+      "ref": "adf31635-da49-4519-8eaf-b139f5cf2815",
+      "dependsOn": [
+        "29ff61b5-1487-48fa-8d2b-1f12e572c481"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/annotated-types@0.8.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/anyio@4.14.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/certifi@2026.7.22",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/grpcio@1.83.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/h11@0.16.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/h2@4.4.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/hpack@4.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/httpcore@1.0.9",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/httpx@0.28.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/hyperframe@6.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/idna@3.18",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/numpy@2.4.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/portalocker@3.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/protobuf@7.35.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pydantic-core@2.46.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pydantic@2.13.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/pyyaml@6.0.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/qdrant-client@1.18.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/typing-extensions@4.16.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/typing-inspection@0.4.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pypi/urllib3@2.7.0",
+      "dependsOn": []
+    }
+  ],
+  "vulnerabilities": []
 }
